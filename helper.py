@@ -10,7 +10,7 @@ def get_daily_input():
         return [__tryeval(i) for i in input]
     except FileNotFoundError:
         uri = 'http://adventofcode.com/2022/day/{day}/input'.format(day=current_day)
-        response = requests.get(uri, cookies={'session': login_info.SESSION_ID}, headers={'User-Agent': login_info.USER_AGENT})
+        response = requests.get(uri, cookies={'session': login_info.SESSION_ID}, headers={'User-Agent': 'github.com/Maximo1491/AdventOfCode2022 by maximo1491@hotmail.com'})
         f = open("day{day}.txt".format(day=current_day), "w")
         f.write(response.content.decode("utf-8"))
         f.close()

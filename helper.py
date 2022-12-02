@@ -18,13 +18,13 @@ def get_daily_input():
         return [__tryeval(i) for i in input]
 
 def __tryeval(val):
-    if val == "\n":
-        return val
-
     try:
         return ast.literal_eval(val)
     except ValueError:
         print(f"Error in __tryeval, failed to convert {val}")
         pass
+    except SyntaxError:
+        #Means its a more complex string so just pass the whole line back
+        return val
 
     

@@ -10,7 +10,7 @@ def get_daily_input():
         return [__tryeval(i) for i in input]
     except FileNotFoundError:
         uri = 'http://adventofcode.com/2022/day/{day}/input'.format(day=current_day)
-        response = requests.get(uri, cookies={'session': login_info.SESSION_ID}, headers={'User-Agent': 'github.com/Maximo1491/AdventOfCode2022 by maximo1491@hotmail.com'})
+        response = requests.get(uri, cookies={'session': login_info.SESSION_ID}, headers={'User-Agent': login_info.USER_AGENT})
         f = open("day{day}.txt".format(day=current_day), "w")
         f.write(response.content.decode("utf-8"))
         f.close()
@@ -20,11 +20,11 @@ def get_daily_input():
 def __tryeval(val):
     try:
         return ast.literal_eval(val)
-    except ValueError:
-        print(f"Error in __tryeval, failed to convert {val}")
-        pass
+    
+    #Means its a more complex string so just pass the whole line back
     except SyntaxError:
-        #Means its a more complex string so just pass the whole line back
-        return val
+        return val.strip()
+    except ValueError:
+        return val.strip()
 
     
